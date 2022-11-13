@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap" rel="stylesheet">
+  <title>Countdown</title>
+</head>
+<body>
+  <div id="sidebar">
+    <div class="toggle-btn" onclick="openMenu()">
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+    <ul>
+      <li>Меню сайту</li>
+      <li><a href="index.html">На головну</a>
+      <li><a href="vinnytsia.html">Про нас</a></li>
+      <li><a href="misto.html">Контакти</a></li>
+
+    </ul>
+  </div>
+
+  <div class="container">
+
+    <h2>Сайт Вінницького зоопарку</h2>
+    <h4>Старт сайту</h4>
+    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+    <div class="countdown">
+      <div class="countdown-item">
+        <h4 class="days">10</h4>
+        <span>дні</span>
+      </div>
+      <div class="countdown-item">
+        <h4 class="hours">06</h4>
+        <span>години</span>
+      </div>
+      <div class="countdown-item">
+        <h4 class="minutes">11</h4>
+        <span>хвилини</span>
+      </div>
+      <div class="countdown-item">
+        <h4 class="seconds">49</h4>
+        <span>секунди</span>
+    </div>
+  </div>
+  <script>
+    function openMenu() {
+      document.getElementById("sidebar").classList.toggle('active')};
+
+      const countdownElement = document.querySelector(".countdown");
+    const items = document.querySelectorAll(".countdown-item > h4");
+
+
+    let countdownDate = new Date(2022, 11, 18, 10, 0, 0).getTime();
+
+    function getCountTime() {
+
+      const now = new Date().getTime();
+
+
+      const distance = countdownDate - now;
+
+
+      const oneDay = 24 * 60 * 60 * 1000;
+      const oneHour = 60 * 60 * 1000;
+      const oneMinute = 60 * 1000;
+
+      let days = Math.floor(distance / oneDay);
+      let hours = Math.floor((distance % oneDay) / oneHour);
+      let minutes = Math.floor((distance % oneHour) / oneMinute);
+      let seconds = Math.floor((distance % oneMinute) / 1000);
+
+
+      const values = [days, hours, minutes, seconds];
+
+
+      items.forEach(function (item, index) {
+        item.textContent = values[index];
+      });
+
+
+      if (distance < 0) {
+        clearInterval(countdown);
+        countdownElement.innerHTML = "<h4 class='expired'>Время вышло!</h4>";
+      }
+    }
+
+    let countdown = setInterval(getCountTime, 1000);
+
+
+</script>
+</body>
+</html>
